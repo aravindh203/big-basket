@@ -1,0 +1,235 @@
+ .content-container{
+    padding: 50px 0px;
+ }
+ .basket-container{
+    padding: 10px 0px;
+ }
+ .card-container{
+    .cards{
+        padding: 10px;
+        border-radius: 0 !important;
+    }
+    .card{
+        position: relative;
+    }
+    
+    .card-details{
+        padding: 10px;
+        span{
+            font-size: 11px;
+            color: grey;
+            padding-right: 5px;
+        }
+        .card-content{
+            width: 100%;
+            display: flex;
+            .card-info{
+               padding: 0px 5px;
+                p{
+                    font-size: 10px;
+                    color: grey;
+                    span{
+                        padding-right: 0px;
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+        .card-actions{
+            background-color: #f4f3f2;
+            .card-button{
+                padding: 10px;
+                .decrement-button{
+                    font-size: 10px !important;
+                    padding: 0px !important;
+                    min-width: 30px !important;
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                    border-top-right-radius: 0px;
+                    border-bottom-right-radius: 0px;
+                    box-shadow:0px 0px 1px grey; 
+                    color: grey;
+                    border: none;
+                }
+                input{
+                    width: 45px;
+                    padding: 5px;
+                    height: 21px;
+                    text-align: center;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    border:1px solid #ccc;
+                }
+                .increment-button{
+                    font-size: 12px !important;
+                    padding: 0px 15px !important;
+                    min-width: 30px !important;
+                    margin-left: 10px;
+                    background-color: #fee67c;
+                    border: 1px solid #fee67c;
+                    border: none;
+                    color: grey;
+                    i{
+                        padding-left: 5px;
+                    }
+                }
+            }
+            .add-to-card-button{
+                padding: 10px;
+                div{
+                    padding: 5px;
+                    width: 80%;
+                    background-color: #fee67c ;
+                    border-radius: 5px;
+                    position: relative;
+                    border:1px solid #dedede;
+                    p{
+                        font-size: 10px;
+                        text-align: center;
+                    }
+                    button{
+                        font-weight: bold;
+                        font-size: 16px;
+                        border: none;
+                        padding: 2px 6px;
+                        color: #999999;
+                    }
+                    .add-button{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        border-left:1px solid #dedede;
+                        border-top-right-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                    }
+                    .minus-button{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        border-right:1px solid #dedede;
+                        border-top-left-radius: 5px;
+                        border-bottom-left-radius: 5px;
+                    }
+                }
+            }
+        }
+    }
+    
+ }
+.heading{
+    padding: 50px 10px 20px 10px;
+    h2{
+        padding: 8px 0px;
+        text-align: center;
+        font-weight: 100;
+        border-bottom: 1px solid lightgrey;
+    }
+}
+
+.card-offer{
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top:0;
+    right: 0;
+    z-index: 1;
+    .offer{
+        width: 100%;
+        padding: 5px;
+        box-shadow: 0px 0px 3px lightgrey;
+        display: flex;
+        justify-content: end;
+        span{
+            font-size: 11px;
+            color: #ba5253;
+        }
+        i{
+            font-size: 11px;
+            padding-left: 5px;
+            color: #e1565a;
+        }
+    }
+}
+
+
+.basket-container{
+    .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+        bottom: 12px !important;
+        top:6px !important;
+    }
+    .css-15g1ge8-MuiAutocomplete-root .MuiOutlinedInput-root {
+        padding: 5px !important;
+    }
+    .css-15g1ge8-MuiAutocomplete-root {
+        width: 190px !important;
+    }
+    .css-15g1ge8-MuiAutocomplete-root .MuiAutocomplete-inputRoot {
+        border-radius: 0 !important;
+        margin: -12px 0px !important;
+    }
+    .MuiButtonBase-root{
+        .css-i4bv87-MuiSvgIcon-root {
+            border:1px solid grey;
+            margin:-9px;
+        }
+    }
+    .css-o69gx8-MuiCardMedia-root {
+        padding: 40px 30px 10px 30px;
+    }
+    .css-1t6e9jv-MuiCardActions-root {
+        padding: 8px 8px 0px 8px!important;
+    }
+    .css-ptiqhd-MuiSvgIcon-root {
+        display: none !important;
+    }
+    .MuiButtonBase-root .css-i4bv87-MuiSvgIcon-root {
+        width: 20px !important;
+        height: 20px !important;
+        border: 1px solid #ccc;
+    }
+    .css-15g1ge8-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+        font-size: 13px !important;
+        color: #666;
+    }
+}
+
+
+
+
+
+
+.basket-container{
+    .slick-next:before {
+        content: '→';
+        font-size: 30px;
+        font-weight: 100;
+        padding: 5px;
+        color: #a6a6a6;
+        background-color: white;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+    }
+    .slick-prev:before {
+        content: '←';
+        font-size: 30px;
+        font-weight: 100;
+        padding: 5px;
+        color: #a6a6a6;
+        background-color: white;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+    }
+    .slick-prev{
+        left:-1.5% !important;
+        z-index: 2;
+        top: 50%;
+    }
+    .slick-next{
+        right:0 !important;
+        z-index: 2;
+        top: 51%;
+    }
+    .slick-slider{
+        width: 100%;
+    }
+}

@@ -1,0 +1,77 @@
+.footer{
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 60px 0px 0px 0px;
+    .footer-card{
+        width: 25%;
+        padding: 10px;
+        h4{
+            color: #84c225;
+            padding: 15px 0px;
+            font-weight: 100;
+        }
+        ul{
+            line-height: 2.5;
+            li{
+                list-style-type: none;
+                font-size: 14px;
+                color: grey;
+                transition: all 0.5s linear;
+                cursor: pointer;
+            }
+            li:hover{
+                color: #84c225;
+            }
+        }
+        .footer-icons{
+            display: flex;
+            gap: 2%;
+            .footer-icon{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+                color: white;
+                border:2px solid #ddd;  
+            }
+            .facebook{
+                background-color: #3b5998;
+                
+            }
+            .facebook:hover{
+                color: #3b5998 ;
+                background-color: white;
+                border:2px solid #3b5998;
+            }
+            .pinterest{
+                background-color: #db3236;
+            }
+            .pinterest:hover{
+                color: #db3236;
+                background-color: white;
+                border: 2px solid #db3236;
+            }
+            .twitter{
+                background-color: #00aced;
+            }
+            .twitter:hover{
+                color: #00aced;
+                background-color: white;
+                border: 2px solid #00aced;
+            }
+            .instagram{
+                background-color: #517fa4;
+            }
+            .instagram:hover{
+                color: #517fa4;
+                background-color: white;
+                border: 2px solid #517fa4;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.product-container{
+    width: 85%;
+    margin: auto;
+    .product-card{
+        display: flex;
+        flex-wrap: wrap;
+        .product-cards{  
+            padding: 5px;
+            width:16.6%;
+            .product-card{
+                img{
+                    width: 100%;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+.snack-store{
+    .product-cards{
+        width: 25% !important;
+    }
+}
