@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import './allproducts.scss'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import Card from "@mui/material/Card";
@@ -14,7 +14,7 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updatePrice,
@@ -28,42 +28,114 @@ import "../basket/basket.scss";
 const AllProducts = () =>{
 
 
-    const state = useSelector(({ products }) => products);
-  
-
-  const navigate = useNavigate();
+  const state = useSelector(({ products }) => products);
   const dispatch = useDispatch();
+  const params=useParams();
+  const [allProduct,changeAllProduct]=useState([...state[params.key]])
 
-  const addCart = (
-    id,
-    productName,
-    price,
-    discountedPrice,
-    weight,
-    imageUrl,
-    brandName,
-    key
-  ) => {
-    var object = {
-      id,
-      productName,
-      price,
-      discountedPrice,
-      weight,
-      imageUrl,
-      quantity: 1,
-      brandName,
-      category: key,
-    };
+  const allBrandNames=[...state[params.key]].map(value=>value.brandName);
+
+  function removeDuplicates(array) {
+      return array.filter((item,index) => array.indexOf(item) === index);
+  }
+     
+  const brandNames=removeDuplicates(allBrandNames);
+
+  const filteredBrandName=[...brandNames].map(()=>'');
+  const [filterBrandnames,changeFilterBrandNames]=useState(filteredBrandName);
+  
+  useEffect(()=>{
+
+    var findEmpty=[...filterBrandnames].every(value=>value==='')
+
+    var filterAllProduct=[];
+    if(findEmpty){
+      filterAllProduct=[...state[params.key]].map(value=>value)
+    }
+    else{
+      [...filterBrandnames].forEach(values=>{
+        [...state[params.key]].forEach(value=>{
+          if(values===value.brandName){
+            filterAllProduct.push(value)
+          }
+        })
+      })
+    }
+
+    changeAllProduct(filterAllProduct)
+
+  },[filterBrandnames])
+
+  const handleBrandNames = (event,index) =>{
+
+    var updateValue;
+    if(event.target.checked===true)
+      updateValue=brandNames[index];
+    else updateValue=''
+    var updateFilterBrandname=[...filterBrandnames]
+    updateFilterBrandname[index]=updateValue;
+
+    changeFilterBrandNames(updateFilterBrandname)
+
+  }
+
+  const allPrice=['Less than Rs 20','Rs 21 to Rs 50','Rs 51 to Rs 100','Rs 101 to Rs 200','Rs 201 to Rs 500','More than 501']
+  const allPriceAuthendication=[...allPrice].map(value=>false);
+  const [filterPriceAuthendication,changeFilterPriceAuthendication]=useState(allPriceAuthendication)
+  const allPrices=[[0,20],[21,50],[51,100],[101,200],[201,500],[0,501]];
+
+  console.log('allPriceAuthendication',filterPriceAuthendication);
+
+  const handleFilterPrice = (event,index) =>{
+    var changepriceAuthendication=[...filterPriceAuthendication];
+    changepriceAuthendication[index]=event.target.checked;
+
+    changeFilterPriceAuthendication(changepriceAuthendication)
+  }
+  
+  useEffect(()=>{
+    var findEmptyAuthendication=[...filterPriceAuthendication].every(value=>value===false)
+
+    var filterdPrice
+    if(findEmptyAuthendication){
+      filterdPrice=[...allProduct]
+    } 
+    else{
+      filterdPrice=[];
+      [...filterPriceAuthendication].forEach((values,index)=>{
+        [...allProduct].forEach((value)=>{
+          if(values===true){
+            console.log('value',value.discountedPrice);
+            var prices=allPrices[index];
+            if(value.discountedPrice<=prices[0] && value.discountedPrice>=prices[1]){
+              filterdPrice.push(value)
+            }
+          }
+        })
+      })
+    }
+    
+    console.log('filterdPrice',filterdPrice);
+  },[filterPriceAuthendication])
+
+
+
+
+
+  const addCart = (id,productName,price,discountedPrice,weight,imageUrl,brandName,key) => {
+
+    var object = {id,productName,price,discountedPrice,weight,imageUrl,quantity: 1,brandName,category: key,};
     var index = state[key].findIndex((value) => value.id === id);
 
     dispatch(addToCart({ object, key, index }));
   };
 
   const update = (event, weightPakages, Id, key) => {
+
     var newIndex = weightPakages.findIndex(
       (value) => value === event.target.innerText
     );
+    
     var index = state[key].findIndex((value) => value.id === Id);
 
     var authendication;
@@ -105,9 +177,6 @@ const AllProducts = () =>{
     }
   };
 
-
-
-
     return(
         <>
             <div className="all-products-container">
@@ -119,80 +188,22 @@ const AllProducts = () =>{
                             </div>
                             <div className="product-filter-content">
                                 <div className="product-search">
-                                    <input type={'text'} placeholder='Search by Brand' />
+                                    <input type={'text'} placeholder='Search by Brand'/>
                                     <div>
                                         <i className="bi bi-search"></i>
                                     </div>
                                 </div>
                                 <div className="product-search-content">
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
-                                    <div>
-                                        <input type={'checkbox'}></input>
-                                        <lable>Brand name</lable>
-                                    </div>
+                                    {
+                                      brandNames.map((value,index)=>{
+                                        return(
+                                          <div key={index}>
+                                              <input type={'checkbox'} onChange={(event)=>handleBrandNames(event,index)}></input>
+                                              <label>{value}</label>
+                                          </div>
+                                        );
+                                      })
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -201,30 +212,16 @@ const AllProducts = () =>{
                                 <span>Price</span>
                             </div>
                             <div className="product-filter-content">
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <lable>Less tha Rs 20()</lable>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <lable>Rs 21 to Rs 50()</lable>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <lable>Rs 51 to Rs 100()</lable>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <lable>Rs 101 to Rs 200()</lable>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <lable>Rs 201 to Rs 500()</lable>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <lable>More tha Rs 501()</lable>
-                                </div>
+                                {
+                                  allPrice.map((value,index)=>{
+                                    return(
+                                      <div key={index}>
+                                          <input type={'checkbox'} onChange={(event)=>handleFilterPrice(event,index)}></input>
+                                          <label>{value}</label>
+                                      </div>
+                                    )
+                                  })
+                                }
                             </div>
                         </div>
                         <div className="product-filter-card">
@@ -234,30 +231,30 @@ const AllProducts = () =>{
                             <div className="product-filter-content">
                                 <div>
                                     <input type={'checkbox'}></input>
-                                    <lable>Upto 5%()</lable>
+                                    <label>Upto 5%</label>
                                 </div>
                                 <div>
                                     <input type={'checkbox'}></input>
-                                    <lable>5% - 10%()</lable>
+                                    <label>5% - 10%</label>
                                 </div>
                                 <div>
                                     <input type={'checkbox'}></input>
-                                    <lable>10% - 15%()</lable>
+                                    <label>10% - 15%</label>
                                 </div>
                                 <div>
                                     <input type={'checkbox'}></input>
-                                    <lable>15% - 25%()</lable>
+                                    <label>15% - 25%</label>
                                 </div>
                                 <div>
                                     <input type={'checkbox'}></input>
-                                    <lable>More than 25%()</lable>
+                                    <label>More than 25%</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="all-products-cards">
                         <div className="all-products-heading">
-                            <h2>Organic Fruits & Vegetables (103)</h2>
+                            <h2>Organic Fruits & Vegetables ({allProduct.length})</h2>
                             <select name="cars" id="cars">
                                 <option value="">Popularity</option>
                                 <option value="">Price - Low to High</option>
@@ -281,10 +278,10 @@ const AllProducts = () =>{
 
         <Grid container className="card-container">
           
-            {state.vegetables.map((value, index) => {
+            {allProduct.map((value, index) => {
               return (
                 
-                  <Grid className="cards" key={index} xs={3}>
+                  <Grid className="cards" key={index} xs={3} item>
                     <Card className="card">
                       <CardActionArea>
                         <CardMedia

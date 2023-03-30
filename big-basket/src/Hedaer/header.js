@@ -60,8 +60,6 @@ const Header = () =>{
         dispatch(remove({index,id,key,mainIndex,authendication}))
       }
 
-
-
     return(
         <>
            <div className="header-container">
@@ -94,7 +92,7 @@ const Header = () =>{
                         </div>
                         <div className="header-buy" onMouseOver={()=>changeBasketAuthendication(true)} onMouseLeave={()=>changeBasketAuthendication(false)}>
                             <div>
-                                <i class="fa fa-basket-shopping"></i>
+                                <i className="fa fa-basket-shopping"></i>
                             </div>
                             <div className="header-icon-content">
                                 <p>my Basket</p>
@@ -135,7 +133,7 @@ const Header = () =>{
                                                                                     <span>saved Rs.{((value.quantity*value.price)-(value.quantity*value.discountedPrice)).toFixed(2)}</span>
                                                                                 </div>
                                                                                 <div className="basket-remove">
-                                                                                    <i className="bi bi-x" onClick={()=>removeProduct(value.weight,value.id,value.category)}></i>
+                                                                                    <p onClick={()=>removeProduct(value.weight,value.id,value.category)}>x</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -189,3 +187,4 @@ const Header = () =>{
 }
 
 export default Header;
+

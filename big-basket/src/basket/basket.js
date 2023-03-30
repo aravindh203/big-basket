@@ -284,7 +284,7 @@ const Basket = () => {
 
         <Grid container className="card-container">
           <Slider {...settings}>
-            {state.vegetables.map((value, index) => {
+            {state.bestSellers.map((value, index) => {
               return (
                 <div key={index}>
                   <Grid className="cards">

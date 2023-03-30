@@ -312,7 +312,7 @@ export const smartBasket=[
         rate: [275,56],
         dicountedRate:[266,53.50],
         offer: 4,
-        price: 276,
+        price: 275,
         discountedPrice: 266,
         weight:'500 g Carton - Rs 266.00',
         imageUrl: 'https://www.bigbasket.com/media/uploads/p/s/104860_8-amul-butter-pasteurised.jpg',
