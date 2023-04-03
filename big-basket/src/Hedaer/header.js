@@ -79,7 +79,7 @@ const Header = () =>{
                                     <span>560004,Bangalore</span>
                                 </div>
                                 <div className="heaer-contact-icon">
-                                    <i className="bi bi-person"></i>
+                                    <i className="fa fa-user"></i>
                                     <span>Login/Sign Up</span>
                                 </div>
                             </div>

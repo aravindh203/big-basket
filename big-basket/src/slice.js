@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { smartBasket } from "./AllData/smartBasket";
 import { bestSeller } from "./AllData/bestSellers";
+import { vegetables } from "./AllData/vegetables";
 
 const slice=createSlice({
     name:'products', 
     initialState:{
         vegetables:smartBasket,
         bestSellers:bestSeller,
+        friutsAndVegetables:vegetables,
         addToCart:[]
     },
     reducers:{

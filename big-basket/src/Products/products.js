@@ -25,7 +25,7 @@ const Products = () =>{
                     <div className='heading'>
                         <h2>My Smart Basket</h2>
                     </div>
-                    <div onClick={()=>goToAllProducts('vegetables')} className="product-card">
+                    <div onClick={()=>goToAllProducts('friutsAndVegetables')} className="product-card">
 
                         {
                             fruitsAndVegetables.map((value,index)=>{

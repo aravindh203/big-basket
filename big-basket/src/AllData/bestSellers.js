@@ -26,7 +26,7 @@ export const  bestSeller=[
             price:65,
             discountedPrice:42,
             weight:'6 pcs-Rs 42.00',
-            imageUrl: "https://www.bigbasket.com/media/uploads/p/s/281204…m-eggs-regular-medium-antibiotic-residue-free.jpg",
+            imageUrl: 'https://www.bigbasket.com/media/uploads/p/s/281204_9-fresho-farm-eggs-regular-medium-antibiotic-residue-free.jpg',
             weightPakages:[],
             addTocardAuthendication:false,
             quantity:1
@@ -42,7 +42,7 @@ export const  bestSeller=[
             price:140,
             discountedPrice:105,
             weight:'12 pcs - Rs 105.00',
-            imageUrl: "https://www.bigbasket.com/media/uploads/p/s/400723…ggs-table-tray-medium-antibiotic-residue-free.jpg",
+            imageUrl: 'https://www.bigbasket.com/media/uploads/p/s/40072320_2-fresho-farm-eggs-table-tray-medium-antibiotic-residue-free.jpg',
             weightPakages:['12 pcs - Rs 105.00','30 pcs - Rs 229.00'],
             addTocardAuthendication:false,
             quantity:1

@@ -152,6 +152,7 @@ const Basket = () => {
                             }
                             gutterBottom
                             variant="body2"
+                            className="product-name"
                           >
                             {value.productName}
                           </Typography>

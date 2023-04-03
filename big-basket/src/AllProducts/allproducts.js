@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import {
   Container,
   Grid,
-  Button,
+  Button, 
   CardActionArea,
   CardActions,
   Autocomplete,
@@ -44,28 +44,6 @@ const AllProducts = () =>{
   const filteredBrandName=[...brandNames].map(()=>'');
   const [filterBrandnames,changeFilterBrandNames]=useState(filteredBrandName);
   
-  useEffect(()=>{
-
-    var findEmpty=[...filterBrandnames].every(value=>value==='')
-
-    var filterAllProduct=[];
-    if(findEmpty){
-      filterAllProduct=[...state[params.key]].map(value=>value)
-    }
-    else{
-      [...filterBrandnames].forEach(values=>{
-        [...state[params.key]].forEach(value=>{
-          if(values===value.brandName){
-            filterAllProduct.push(value)
-          }
-        })
-      })
-    }
-
-    changeAllProduct(filterAllProduct)
-
-  },[filterBrandnames])
-
   const handleBrandNames = (event,index) =>{
 
     var updateValue;
@@ -80,11 +58,9 @@ const AllProducts = () =>{
   }
 
   const allPrice=['Less than Rs 20','Rs 21 to Rs 50','Rs 51 to Rs 100','Rs 101 to Rs 200','Rs 201 to Rs 500','More than 501']
-  const allPriceAuthendication=[...allPrice].map(value=>false);
+  const allPriceAuthendication=[...allPrice].map(()=>false);
   const [filterPriceAuthendication,changeFilterPriceAuthendication]=useState(allPriceAuthendication)
-  const allPrices=[[0,20],[21,50],[51,100],[101,200],[201,500],[0,501]];
-
-  console.log('allPriceAuthendication',filterPriceAuthendication);
+  const allPrices=[[0,20],[21,50],[51,100],[101,200],[201,500],[501]];
 
   const handleFilterPrice = (event,index) =>{
     var changepriceAuthendication=[...filterPriceAuthendication];
@@ -92,34 +68,129 @@ const AllProducts = () =>{
 
     changeFilterPriceAuthendication(changepriceAuthendication)
   }
+
+  const allDiscount=['Upto 5%','5% - 10%','10% - 15%','15% - 25%','More than 25%'];
+  const allDiscountAuthendication=[...allDiscount].map(()=>false)
+  const [filterDicountAuthendication,changeFilterDicountAuthendication]=useState(allDiscountAuthendication);
+  const allDiscounts=[[0,5],[5,10],[10,15],[15,25],[25]]
   
+  const handleFilterDisoount = (event,index) =>{
+    var changeDiscountAuthendication=[...filterDicountAuthendication];
+    changeDiscountAuthendication[index]=event.target.checked;
+
+    changeFilterDicountAuthendication(changeDiscountAuthendication)
+  }
+
+  const [allProductFilter,changeAllProductFilter]=useState('Popularity')
+  console.log('allProductFilter',allProductFilter);
+
   useEffect(()=>{
+
+    var findEmpty=[...filterBrandnames].every(value=>value==='') 
+
+    var filterAllProduct=[];
+    if(findEmpty){
+      filterAllProduct=[...state[params.key]]
+    }
+    else{
+      [...filterBrandnames].forEach(values=>{
+        [...state[params.key]].forEach(value=>{
+          if(values===value.brandName){
+            filterAllProduct.push(value)
+          }
+        })
+      })
+    }
+
     var findEmptyAuthendication=[...filterPriceAuthendication].every(value=>value===false)
 
-    var filterdPrice
+    var filterdPrice;
     if(findEmptyAuthendication){
-      filterdPrice=[...allProduct]
+      filterdPrice=[...filterAllProduct];
     } 
     else{
       filterdPrice=[];
       [...filterPriceAuthendication].forEach((values,index)=>{
-        [...allProduct].forEach((value)=>{
-          if(values===true){
-            console.log('value',value.discountedPrice);
+        [...filterAllProduct].forEach((value)=>{
+          if(values){
+            
             var prices=allPrices[index];
-            if(value.discountedPrice<=prices[0] && value.discountedPrice>=prices[1]){
-              filterdPrice.push(value)
+            
+            if(prices.length===2){
+              if(value.discountedPrice>=prices[0] && value.discountedPrice<=prices[1]){
+                filterdPrice.push(value)
+              }
+            }
+            else{
+              if(value.discountedPrice>=prices[0]){
+                filterdPrice.push(value)
+              }
+            }
+          }
+        })
+      })  
+    }
+    
+    var findDiscountEmpty=[...filterDicountAuthendication].every(value=>value===false)
+
+    var filteredDiscount;
+    if(findDiscountEmpty){
+      filteredDiscount=filterdPrice;
+    }
+    else{
+      filteredDiscount=[];
+      [...filterDicountAuthendication].forEach((values,index)=>{
+        [...filterdPrice].forEach(value=>{
+
+          if(values){
+            var discount=allDiscounts[index];
+
+            if(discount.length===2){
+              if(value.offer>=discount[0] && value.offer<=discount[1]){
+                filteredDiscount.push(value)
+              }
+            }
+            else{
+              if(value.offer>=discount[0]){
+                filteredDiscount.push(value)
+              }
             }
           }
         })
       })
     }
     
-    console.log('filterdPrice',filterdPrice);
-  },[filterPriceAuthendication])
+    var allProductFilterValue;
 
+    if(allProductFilter==='Price - Low to High'){
+      allProductFilterValue=[...filteredDiscount].sort((a,b)=>a.discountedPrice-b.discountedPrice)
+    }
+    else if(allProductFilter==='Price - High to Low'){
+      allProductFilterValue=[...filteredDiscount].sort((a,b)=>b.discountedPrice-a.discountedPrice)
+    }
+    else if(allProductFilter==='Alphabetical'){
+      allProductFilterValue= [...filteredDiscount].sort((a,b) => {
+          var la = a.productName.toLowerCase();
+          var lb = b.productName.toLowerCase();
+          if(la<lb) return -1;
+          if(la>lb) return 1;
+          return 0;
+      }) 
+    }
+    else if(allProductFilter==='% Off - High to Low'){
+      allProductFilterValue=[...filteredDiscount].sort((a,b)=>b.offer-a.offer)
+    }
+    else if(allProductFilter==='% Off - Low to High'){
+      allProductFilterValue=[...filteredDiscount].sort((a,b)=>a.offer-b.offer)
+    }
+    else{
+      allProductFilterValue=[...filteredDiscount]
+    }
 
+    console.log('allProductFilterValue',allProductFilterValue);
+    changeAllProduct(allProductFilterValue)
 
+  },[state,filterBrandnames,filterPriceAuthendication,filterDicountAuthendication,allProductFilter])
 
 
   const addCart = (id,productName,price,discountedPrice,weight,imageUrl,brandName,key) => {
@@ -229,40 +300,29 @@ const AllProducts = () =>{
                                 <span>Discount</span>
                             </div>
                             <div className="product-filter-content">
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <label>Upto 5%</label>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <label>5% - 10%</label>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <label>10% - 15%</label>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <label>15% - 25%</label>
-                                </div>
-                                <div>
-                                    <input type={'checkbox'}></input>
-                                    <label>More than 25%</label>
-                                </div>
+                                {
+                                  allDiscount.map((value,index)=>{
+                                    return(
+                                      <div key={index}>
+                                          <input type={'checkbox'} onChange={(event)=>handleFilterDisoount(event,index)}></input>
+                                          <label>{value}</label>
+                                      </div>
+                                    );
+                                  })
+                                }
                             </div>
                         </div>
                     </div>
                     <div className="all-products-cards">
                         <div className="all-products-heading">
-                            <h2>Organic Fruits & Vegetables ({allProduct.length})</h2>
-                            <select name="cars" id="cars">
-                                <option value="">Popularity</option>
-                                <option value="">Price - Low to High</option>
-                                <option value="mercedes">Price - High to Low</option>
-                                <option value="audi">Alphabetical</option>
-                                <option value="saab">Rupee Saving - High to Low</option>
-                                <option value="mercedes">Rupee Saving - Low to High</option>
-                                <option value="audi">% Off - High to Low</option>
+                            <h2>{params.key} ({allProduct.length})</h2>
+                            <select name="cars" id="cars" onChange={(event)=>changeAllProductFilter(event.target.value)}>
+                                <option value="Popularity">Popularity</option>
+                                <option value="Price - Low to High">Price - Low to High</option>
+                                <option value="Price - High to Low">Price - High to Low</option>
+                                <option value="Alphabetical">Alphabetical</option>
+                                <option value="% Off - High to Low">% Off - High to Low</option>% Off - Low to High
+                                <option value="% Off - Low to High">% Off - Low to High</option>
                             </select>
                         </div>
                         <div className="all-products-icon">
