@@ -9,16 +9,20 @@ const slice=createSlice({
         vegetables:smartBasket,
         bestSellers:bestSeller,
         friutsAndVegetables:vegetables,
-        addToCart:[]
+        addToCart:[],
+        loginAuthendication:true
     },
     reducers:{
+        login:(state,action)=>{
+            state.loginAuthendication=action.payload;
+        },
         updatePrice:(state,action)=>{
             state[action.payload.key][action.payload.index].weight=state[action.payload.key][action.payload.index].weightPakages[action.payload.indexNo]
             state[action.payload.key][action.payload.index].price=state[action.payload.key][action.payload.index].rate[action.payload.indexNo]
             state[action.payload.key][action.payload.index].discountedPrice=state[action.payload.key][action.payload.index].dicountedRate[action.payload.indexNo]
             state[action.payload.key][action.payload.index].addTocardAuthendication=action.payload.authendication;
         },
-        addToCart:(state,action)=>{
+        addToCart:(state,action)=>{ 
             state.addToCart.push(action.payload.object);
             state[action.payload.key][action.payload.index].addTocardAuthendication=true;
             state[action.payload.key][action.payload.index].quantity=1;
@@ -38,5 +42,5 @@ const slice=createSlice({
     }
 })
 
-export const { updatePrice,addToCart,updateQuantity,updateQuantityValue,remove }=slice.actions;
+export const { updatePrice,addToCart,updateQuantity,updateQuantityValue,remove,login }=slice.actions;
 export default slice.reducer;

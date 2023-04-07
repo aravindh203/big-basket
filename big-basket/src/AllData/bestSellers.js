@@ -9,9 +9,9 @@ export const  bestSeller=[
             offer:30,
             price:61.84,
             discountedPrice:43,
-            weight:'2kg-Rs 43.00',
+            weight:'2 kg - Rs 43.00',
             imageUrl: "https://www.bigbasket.com/media/uploads/p/s/40075537_5-fresho-onion.jpg",
-            weightPakages:['2 kg-Rs 43.00','1 kg-Rs 21.50','5 kg-Rs 105'],
+            weightPakages:['2 kg - Rs 43.00','1 kg - Rs 21.50','5 kg - Rs 105'],
             addTocardAuthendication:false,
             quantity:1
     },
@@ -186,8 +186,8 @@ export const  bestSeller=[
             price:207,
             discountedPrice:149,
             weight:'500 g - Rs 149.00',
-            imageUrl: "	https://www.bigbasket.com/media/uploads/p/s/100009…urry-cut-without-skin-antibiotic-residue-free.jpg",
-            weightPakages:['500 g-Rs 149.00','1 kg-Rs 269.00','250 kg-Rs 119.00'],
+            imageUrl:'https://www.bigbasket.com/media/uploads/p/s/40048898_5-fresho-chicken-curry-cut-without-skin-antibiotic-residue-free.jpg',
+            weightPakages:['500 g - Rs 149.00','1 kg -Rs 269.00','250 kg -Rs 119.00'],
             addTocardAuthendication:false,
             quantity:1
     },

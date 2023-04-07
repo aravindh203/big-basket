@@ -6,8 +6,10 @@ import Basket from "./basket/basket";
 import Products from "./Products/products";
 import Details from "./Details/details";
 import AllProducts from "./AllProducts/allproducts";
+import Login from "./Login/login";
+import SignUp from "./signUp/signup";
 import { BrowserRouter,Routes,Route,Navigate } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { stores } from "./store";
 
 const Redux = () =>{
@@ -31,17 +33,33 @@ const Main = () =>{
 }
 
 const Routing = () =>{
+
+    const state=useSelector(({products})=>products);
+
     return(
         <>
             <BrowserRouter>
-                <Header/>
-                <Routes>
-                    <Route path='/' element={<Main/>} />
-                    <Route path='/details/:key/:index' element={<Details/>} />
-                    <Route path='/allProducts/:key' element={<AllProducts/>} />
-                    <Route path='*' element={<Navigate to={'/'} />}/>
-                </Routes>
-                <Footer/>
+                {state.loginAuthendication ?
+
+                <>
+                    <Header/>
+                    <Routes>
+                        <Route path='/' element={<Main/>} />
+                        <Route path='/details/:key/:index' element={<Details/>} />
+                        <Route path='/allProducts/:key' element={<AllProducts/>} />
+                        <Route path='*' element={<Navigate to={'/'} />}/>
+                    </Routes>
+                    <Footer/>
+                </>
+                :
+                <>
+                    <Routes>
+                        <Route path="*" element={<Login/>}/>
+                        <Route path="/signup" element={<SignUp/>}/>
+                    </Routes>
+                </>
+
+                }
             </BrowserRouter>
         </>
     );

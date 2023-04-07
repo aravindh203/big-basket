@@ -16,7 +16,7 @@ const Header = () =>{
             const total=state.addToCart.reduce((total,value)=>{
                 total+=value.quantity*value.discountedPrice
         
-                return total;
+                return total; 
             },0)
             updateTotalPrice(total)
         }
@@ -79,7 +79,7 @@ const Header = () =>{
                                     <span>560004,Bangalore</span>
                                 </div>
                                 <div className="heaer-contact-icon">
-                                    <i className="fa fa-user"></i>
+                                    <i className="bi bi-person"></i>
                                     <span>Login/Sign Up</span>
                                 </div>
                             </div>
@@ -87,12 +87,12 @@ const Header = () =>{
                         <div className="header-search">
                             <div className="header-input">
                                 <input type={'text'} placeholder={'Serach for Products...'}/>
-                                <button><i className="fa fa-search"></i></button>
+                                <button><i className="bi bi-search"></i></button>
                             </div>
                         </div>
                         <div className="header-buy" onMouseOver={()=>changeBasketAuthendication(true)} onMouseLeave={()=>changeBasketAuthendication(false)}>
                             <div>
-                                <i className="fa fa-basket-shopping"></i>
+                                <i className="bi bi-basket"></i>
                             </div>
                             <div className="header-icon-content">
                                 <p>my Basket</p>

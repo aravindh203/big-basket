@@ -19,10 +19,15 @@
                 justify-content: end;
                 .header-contact-content{
                     display: flex;
+                    padding:  0px 5px;
                     .heaer-contact-icon{
                         padding: 0px 10px;
                         span{
+                            font-size: 13px;
+                        }
+                        i{
                             font-size: 15px;
+                            padding-right: 5px;
                         }
                     }
                 }
@@ -129,6 +134,7 @@
                                             border-radius: 50%;
                                             border: 1px solid #888;
                                             color: #888;
+                                            cursor: pointer;
                                         }
                                         div{
                                             padding: 0px 8px;

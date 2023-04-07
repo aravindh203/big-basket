@@ -6,7 +6,7 @@ import { updatePrice,addToCart,updateQuantity,updateQuantityValue,remove } from 
 import './details.scss'
 
 const Details = () =>{
-
+    
     const state = useSelector(({ products }) => products);
     const params=useParams();
     const dispatch=useDispatch();
@@ -17,19 +17,14 @@ const Details = () =>{
 
     useEffect(()=>{
         changeDetail(state[params.key][params.index])
-    },[state[params.key]])
-
-    useEffect(()=>{
-        changeDetail(state[params.key][params.index])
-    },[params])
-
+    },[state[params.key],params])
 
     const addCart = (id,productName,price,discountedPrice,weight,imageUrl,brandName,key) =>{
 
         var object={id,productName,price,discountedPrice,weight,imageUrl,quantity:1,brandName,category:key}  
         var index=state[key].findIndex(value=>value.id===id)
     
-        dispatch(addToCart({object,key,index}))    
+        dispatch(addToCart({object,key,index})) 
     }
 
     const update = (index,id,key) =>{
@@ -76,9 +71,6 @@ const Details = () =>{
           dispatch(updateQuantity({index,key,mainIndex,updatedValue}))
         }  
       }
-
-    
-
 
     return(
         <>
@@ -132,19 +124,19 @@ const Details = () =>{
                                     {
                                         detail.weightPakages.map((value,index)=>{
                                             return(
-                                                <div className="details-box" name={index} key={index} onClick={(event)=>update(Number(event.target.attributes[1].nodeValue),detail.id,detail.category)} >
-                                                    <div className="details-weight" name={index}>
-                                                        <span className="weight" name={index}>{value.slice(0,detail.weight.indexOf('-'))}</span>
+                                                <div className="details-box" key={index} onClick={(event)=>update(index,detail.id,detail.category)} style={detail.weight===detail.weightPakages[index] ? {background:'#84c22533'}:null}>
+                                                    <div className="details-weight">
+                                                        <span className="weight">{value.slice(0,detail.weight.indexOf('-'))}</span>
                                                     </div>
-                                                    <div className="details-box-content" name={index}>
-                                                        <p className='details-rates' name={index}>
-                                                            <span className="rate" name={index}>RS {detail.dicountedRate[index]}</span>
-                                                            MRP:<strike className='strike' name={index}>Rs {detail.rate[index]}</strike>
-                                                            <span className="savings" name={index}>{detail.offer}% off</span>
+                                                    <div className="details-box-content">
+                                                        <p className='details-rates'>
+                                                            <span className="rate">RS {detail.dicountedRate[index]}</span>
+                                                            MRP:<strike className='strike'>Rs {detail.rate[index]}</strike>
+                                                            <span className="savings">{detail.offer}% off</span>
                                                         </p>
                                                     </div>
-                                                    <div className="details-box-icon" name={index}>
-                                                        <i className="fa fa-check" name={index}></i>
+                                                    <div className="details-box-icon" style={detail.weight===detail.weightPakages[index] ? {background:'#9cc63d'}:null}>
+                                                        <i className="bi bi-check-lg" style={detail.weight===detail.weightPakages[index] ? {color:'white'}:null}></i>
                                                     </div>
                                                 </div>
                                             );

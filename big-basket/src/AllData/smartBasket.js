@@ -11,7 +11,7 @@ export const smartBasket=[
         price:102.63,
         discountedPrice:78,
         weight:'1 kg - Rs 78.00',
-        imageUrl: 'https://www.bigbasket.com/media/uploads/p/s/10000069_20-fresho-capsicum-green.jpg',
+        imageUrl: 'https://www.bigbasket.com/media/uploads/p/l/10000067_23-fresho-capsicum-green.jpg',
         weightPakages:['1 kg - Rs 78.00','250 g - Rs 19.50','500 g - Rs 39.00'],
         addTocardAuthendication:false,
         quantity:1
@@ -27,7 +27,7 @@ export const smartBasket=[
         price: 22.03,
         discountedPrice: 11.50,
         weight:'500 g - Rs 11.50',
-        imageUrl: 'https://www.bigbasket.com/media/uploads/p/s/10000071_14-fresho-carrot-orange.jpg',
+        imageUrl: 'https://www.bigbasket.com/media/uploads/p/l/10000071_14-fresho-carrot-orange.jpg',
         weightPakages:['500 g - Rs 11.50','1 kg - Rs 22.50','250 g - Rs 6.00'],
         addTocardAuthendication:false,
         quantity:1
@@ -75,7 +75,7 @@ export const smartBasket=[
         price: 53.05,
         discountedPrice: 31,
         weight:'500 g - Rs 31.00',
-        imageUrl: 'https://www.bigbasket.com/media/uploads/p/s/10000143_14-fresho-ladies-finger.jpg',
+        imageUrl: 'https://www.bigbasket.com/media/uploads/p/l/10000142_16-fresho-ladies-finger.jpg',
         weightPakages:['500 g - Rs 31.00','1 kg - Rs 61.50','250 g - Rs 15.50'],
         addTocardAuthendication:false,
         quantity:1

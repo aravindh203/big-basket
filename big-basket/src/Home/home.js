@@ -6,16 +6,7 @@ import Slider from "react-slick";
 
 const Home = () =>{
 
-
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay:true
-    };
-
+    var settings = {dots: true,infinite: true,speed: 500,slidesToShow: 1,slidesToScroll: 1,autoplay:true};
 
     return(
         <div className="home">

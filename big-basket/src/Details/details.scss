@@ -6,7 +6,7 @@
         flex-wrap: wrap;
         .details-image{
             width: 40%;
-            padding: 10px;
+            padding: 10px; 
             img{
                 width: 100%;
                 height: 100%;
@@ -73,12 +73,16 @@
                 display: flex;
                 align-items: center;
                 gap: 2%;
+                .add{
+                    cursor: pointer;
+                }
                 button{
                     padding: 10px;
                     border-radius: 5px;
                     border: 1px solid #9cc63d;
                     background-color: white;
                     font-weight: 100;
+                    cursor: pointer;
                 }
                 i{
                     font-size: 20px;
@@ -95,16 +99,20 @@
                     display: flex;
                     justify-content: space-between;
                     width: 70%;
-                    padding: 10px;
                     border: 1px solid #c8c8c8;
                     border-radius: 5px;
                     margin-bottom: 5px;
+                    cursor: pointer;
                     .weight{
+                        height: 100%;
+                        padding: 10px;
+                        display: flex;
+                        align-items: center;
                         color: black;
                         font-size: 13px;
                     }
                     .details-box-content{
-                        padding-top: 3px;
+                        padding: 10px;
                         span{
                             padding: 0px 10px;
                         }
@@ -114,10 +122,11 @@
                         }
                     }
                     .details-box-icon{
-                        height: 30px;
+                
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        padding: 10px;
                         i{
                             color: #84c225;
                             font-size: 25px;
