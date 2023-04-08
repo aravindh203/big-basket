@@ -135,7 +135,7 @@ const SignUp = () =>{
                     </div>
                     <div>
                         <input type="number" name="mobile" placeholder="Mobile" value={mobileNumber} onChange={(event)=>handleInputValue(event)}/>
-                        {mobileNumberFlag ? (mobileNumber==='' ? <p><i className="bi bi-star-fill"></i> Mobile number cannot be empty <i className="bi bi-star-fill"></i></p>:(mobileNumber.toString().length===10 ? null:<p>Enter a valid mobile number</p>)):null}
+                        {mobileNumberFlag ? (mobileNumber==='' ? <p><i className="bi bi-star-fill"></i> Mobile number cannot be empty <i className="bi bi-star-fill"></i></p>:null):null}
                         {mobileErrorFlag ? <p><i className="bi bi-star-fill"></i> Enter a valid mobile number <i className="bi bi-star-fill"></i></p>:null}
                     </div>
                     <div>
@@ -145,7 +145,7 @@ const SignUp = () =>{
                     <div>
                         <input type="password" name="confirm-password" placeholder="Confirm password" value={confirmPassword} onChange={(event)=>handleInputValue(event)}/>
                         {confirmPasswordFlag ? (confirmPassword==='' ? <p><i className="bi bi-star-fill"></i> Confirm password cannot be empty <i className="bi bi-star-fill"></i></p>:null):null}
-                        {passwordErrorFlag ? <p>Password does not match</p>:null}
+                        {passwordErrorFlag ? <p><i className="bi bi-star-fill"></i> Password does not match <i className="bi bi-star-fill"></i></p>:null}
                     </div>
                     <div>
                         <button onClick={(event)=>signUp(event)}>Signup</button>

@@ -6,10 +6,27 @@ import { updateQuantity,remove } from "../slice";
 
 const Header = () =>{
 
+    const [totalPrice,updateTotalPrice]=useState(0)
     const state = useSelector(({ products }) => products);
     const dispatch=useDispatch()
+    
+    const [showNavbar,setShowNavbar] = useState(true);
+    
+    useEffect(()=>{
+      window.addEventListener('scroll', handleScroll);
+    },[showNavbar]);
 
-    const [totalPrice,updateTotalPrice]=useState(0)
+    const handleScroll = () =>{
+
+      const scrollPosition = window.scrollY;
+      
+      if(scrollPosition > 40){
+        setShowNavbar(false);
+      }
+      else{
+        setShowNavbar(true);
+      }
+    } 
 
     useEffect(()=>{
         if(state.addToCart.length){
@@ -45,7 +62,6 @@ const Header = () =>{
         }  
       }
 
-
       const removeProduct = (weight,id,key) =>{
 
         var index=state.addToCart.findIndex(value=>value.weight===weight);
@@ -61,14 +77,14 @@ const Header = () =>{
       }
 
     return(
-        <>
+        <section className='header-section' style={showNavbar ? {boxShadow:'none'}:{boxShadow:'0px 0px 3px grey'}}>
            <div className="header-container">
                 <div className="header">
                     <div className="header-image">   
-                        <img src={require('../Asserts/images/bb_logo.png')} alt='ni image'/>
+                        {showNavbar ? <img src={require('../Asserts/images/bb_logo.png')} alt='ni image'/>:<img className="logo" src={require('../Asserts/images/bb_logo_1.jpg')} alt='ni image'/>}
                     </div>
                     <div className="header-content">
-                        <div className="header-contact">
+                        <div className="header-contact" style={showNavbar ? {display:'flex'}:{display:'none'}}>
                             <div className="header-contact-content">
                                 <div className="heaer-contact-icon">
                                     <i className="bi bi-telephone"></i>
@@ -84,7 +100,7 @@ const Header = () =>{
                                 </div>
                             </div>
                         </div>
-                        <div className="header-search">
+                        <div className="header-search" >
                             <div className="header-input">
                                 <input type={'text'} placeholder={'Serach for Products...'}/>
                                 <button><i className="bi bi-search"></i></button>
@@ -92,7 +108,7 @@ const Header = () =>{
                         </div>
                         <div className="header-buy" onMouseOver={()=>changeBasketAuthendication(true)} onMouseLeave={()=>changeBasketAuthendication(false)}>
                             <div>
-                                <i className="bi bi-basket"></i>
+                                <i className="fa fa-shopping-basket"></i>
                             </div>
                             <div className="header-icon-content">
                                 <p>my Basket</p>
@@ -173,7 +189,7 @@ const Header = () =>{
                         
                     </div>
                 </div>
-                <div className="header-bottom">
+                <div className="header-bottom" style={showNavbar ? {display:'flex'}:{display:'none'}}>
                     <div className="header-bottom-dropdwon">
                         <p>SHOP BY CATEGORY</p>
                     </div>
@@ -182,7 +198,7 @@ const Header = () =>{
                     </div>
                 </div>
            </div>                 
-        </>
+        </section>
     );
 }
 

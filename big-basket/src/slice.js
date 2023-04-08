@@ -10,7 +10,7 @@ const slice=createSlice({
         bestSellers:bestSeller,
         friutsAndVegetables:vegetables,
         addToCart:[],
-        loginAuthendication:true
+        loginAuthendication:false
     },
     reducers:{
         login:(state,action)=>{

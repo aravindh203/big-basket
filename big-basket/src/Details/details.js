@@ -10,14 +10,16 @@ const Details = () =>{
     const state = useSelector(({ products }) => products);
     const params=useParams();
     const dispatch=useDispatch();
-    console.log('Detailsstate', state[params.key][params.index]);
-    console.log('detailBasket',state.addToCart);
 
     const [detail,changeDetail]=useState(state[params.key][params.index])
 
     useEffect(()=>{
         changeDetail(state[params.key][params.index])
     },[state[params.key],params])
+
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
 
     const addCart = (id,productName,price,discountedPrice,weight,imageUrl,brandName,key) =>{
 
@@ -48,7 +50,6 @@ const Details = () =>{
         else authendication=false;
 
         dispatch(updatePrice({index:mainIndex,key,indexNo:index,authendication}))
-
     }
 
     const updateValues = (event,weight,id,key) =>{

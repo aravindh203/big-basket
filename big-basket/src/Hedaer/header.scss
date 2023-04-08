@@ -1,3 +1,10 @@
+.header-section{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 3;
+}
 .header-container{
     width: 85%;
     margin: auto;
@@ -8,6 +15,11 @@
         .header-image{
             width: 20%;
             padding-left: 10px;
+            .logo{
+                width: 20%;
+                border-radius: 8px;
+                box-shadow: 0px 0px 3px grey;
+            }
         }
         .header-content{
             width: 80%;
@@ -101,6 +113,7 @@
                                     img{
                                         width: 100%;
                                     }
+                                    
                                 }
                                 .basket-item-info{
                                     width: 45%;

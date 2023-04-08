@@ -19,7 +19,7 @@ const Products = () =>{
             <div className="product-container">
                 <div className="fruits-and-vegetables">
                     <div className='heading'>
-                        <h2>My Smart Basket</h2>
+                        <h2>Fruits & vegetables</h2>
                     </div>
                     <div onClick={()=>goToAllProducts('friutsAndVegetables')} className="product-card">
                         {

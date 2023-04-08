@@ -154,10 +154,7 @@ const AllProducts = () => {
       );
     } 
     else if (allProductFilter === "Price - High to Low") {
-      allProductFilterValue = [...filteredDiscount].sort(
-        (a, b) => b.discountedPrice - a.discountedPrice
-      );
-    } 
+      allProductFilterValue = [...filteredDiscount].sort((a, b) => b.discountedPrice - a.discountedPrice)} 
     else if (allProductFilter === "Alphabetical") {
       allProductFilterValue = [...filteredDiscount].sort((a, b) => {
         var la = a.productName.toLowerCase();
@@ -178,6 +175,7 @@ const AllProducts = () => {
     }
 
     changeAllProduct(allProductFilterValue);
+
   }, [state,filterBrandnames,filterPriceAuthendication,filterDicountAuthendication,allProductFilter]);
 
   const addCart = (id,productName,price,discountedPrice,weight,imageUrl,brandName,key) => {
@@ -237,10 +235,15 @@ const AllProducts = () => {
   };
 
   const goToDetails = (key, id) => {
-    var index = state[key].findIndex((value) => value.id === id);
 
+    var index = state[key].findIndex((value) => value.id === id);
     navigate("/details/" + key + "/" + index);
+
   };
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   return (
     <>

@@ -6,10 +6,17 @@ import { Link } from "react-router-dom";
 
 const Login = () =>{
 
-    const [email,setEmail]=useState('');
+    const [email,setEmail]=useState(''); 
     const [password,setPassword]=useState('');
+
     const [emailFlag,setEmailFlag]=useState(false);
     const [passwordFlag,setPasswordFlag]=useState(false);
+
+    const [emailErrorFlag,setEmailErrorFlag]=useState(false);
+    const [passwordErrorFlag,setPasswordErrorFlag]=useState(false);
+    console.log('emailErrorFlag',emailErrorFlag,'passwordErrorFlag',passwordErrorFlag);
+
+    
     const dispatch=useDispatch()
 
     const handleInputValue = (event) =>{
@@ -17,27 +24,50 @@ const Login = () =>{
         if(event.target.name==='username'){
             setEmail(event.target.value)
             setEmailFlag(true)
+            setEmailErrorFlag(false)
         }
         else{
             setPassword(event.target.value)
             setPasswordFlag(true)
+            setPasswordErrorFlag(false)
         }
-
     }
 
     const submit = (event) =>{
 
         event.preventDefault();
         var allDetails=JSON.parse(localStorage.getItem('bigbasket'));
-        console.log('alldetails',allDetails);
-        
-        var result=allDetails.some(value=>value.email===email && value.newPassword===password);
-        console.log('result',result);
+        var result=[...allDetails].some(value=>value.email===email && value.newPassword===password);
 
         if(result){
             dispatch(login(true))
-            console.log('hello');
         }
+
+        
+        if(email!==''){
+            var detail=allDetails.filter(value=>value.email===email);
+            
+            if(detail.length){
+                if(detail[0].email===email){
+                    setEmailErrorFlag(false)
+                    if(password!==''){
+                        if(detail[0].newPassword===password){
+                            setPasswordErrorFlag(false)
+                        }
+                        else{
+                            setPasswordErrorFlag(true)
+                        }
+                    }
+                }
+                else{
+                    setEmailErrorFlag(true)
+                }
+            }
+            else{
+                setEmailErrorFlag(true)
+            }
+        }
+        
 
         setEmailFlag(true)
         setPasswordFlag(true)
@@ -53,10 +83,12 @@ const Login = () =>{
                     <div>
                         <input type={'text'} name="username" placeholder={'Email'} onChange={(event)=>handleInputValue(event)}></input>
                         {emailFlag ? (email==='' ? <p><i className="bi bi-star-fill"></i> Email cannot be empty <i className="bi bi-star-fill"></i></p>:null):null}
+                        {emailErrorFlag ? <p><i className="bi bi-star-fill"></i> This email is not have an acoount <i className="bi bi-star-fill"></i></p>:null}
                     </div>
                     <div>
                         <input type={'password'} name='password' placeholder={'password'} onChange={(event)=>handleInputValue(event)}></input>
                         {passwordFlag ? (password==='' ? <p><i className="bi bi-star-fill"></i> Password cannot be empty <i className="bi bi-star-fill"></i></p>:null):null}
+                        {passwordErrorFlag ? <p><i className="bi bi-star-fill"></i> Password was incorrect <i className="bi bi-star-fill"></i></p>:null}
                     </div>
                     <div className="button">
                         <button onClick={(event)=>submit(event)}>Login</button>
