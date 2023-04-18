@@ -1,77 +1,94 @@
-import React, { useState } from "react";
-import './login.scss'
-import { useDispatch } from "react-redux";
-import { login } from "../slice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login,users } from "../slice";
 import { Link } from "react-router-dom";
+import { ref,onValue } from "firebase/database";
+import { db } from "../firebase";
+import './login.scss'
 
 const Login = () =>{
 
-    const [email,setEmail]=useState(''); 
-    const [password,setPassword]=useState('');
-
-    const [emailFlag,setEmailFlag]=useState(false);
-    const [passwordFlag,setPasswordFlag]=useState(false);
-
-    const [emailErrorFlag,setEmailErrorFlag]=useState(false);
-    const [passwordErrorFlag,setPasswordErrorFlag]=useState(false);
-    console.log('emailErrorFlag',emailErrorFlag,'passwordErrorFlag',passwordErrorFlag);
-
-    
     const dispatch=useDispatch()
+    const state=useSelector(({products})=>products);
+    console.log('state',state.users);
+
+    useEffect(()=>{
+
+        const getValues = async () =>{
+            await onValue(ref(db,'users'),(snapShot)=>{
+                const data=snapShot.val();
+                if(data){
+                    dispatch(users([...Object.values(data)]))
+                }
+                else{
+                    dispatch(users([]))
+                }
+            })
+        }
+
+        getValues()
+    },[])
+
+    const [data,setData]=useState({
+        email:'',
+        password:''
+    })
+
+    const [emptyError,setEmptyError]=useState({
+        email:false,
+        password:false
+    })
+
+    const [dataValidation,setDataValidation]=useState({
+        email:false,
+        password:false
+    })
 
     const handleInputValue = (event) =>{
-        
-        if(event.target.name==='username'){
-            setEmail(event.target.value)
-            setEmailFlag(true)
-            setEmailErrorFlag(false)
+
+        if(event.target.name==='user-name'){
+            setData({...data,email:event.target.value})
+            setEmptyError({...emptyError,email:true})
         }
         else{
-            setPassword(event.target.value)
-            setPasswordFlag(true)
-            setPasswordErrorFlag(false)
+            setData({...data,password:event.target.value})
+            setEmptyError({...emptyError,password:true})
         }
+
+        setDataValidation({email:false,password:false})
+
     }
 
     const submit = (event) =>{
 
         event.preventDefault();
-        var allDetails=JSON.parse(localStorage.getItem('bigbasket'));
-        var result=[...allDetails].some(value=>value.email===email && value.newPassword===password);
 
-        if(result){
+        setEmptyError({
+            email:true,
+            password:true
+        })
+
+        const find=state.users.some(value=>value.email===data.email && value.password===data.password)
+
+        if(find){
             dispatch(login(true))
         }
 
-        
-        if(email!==''){
-            var detail=allDetails.filter(value=>value.email===email);
-            
-            if(detail.length){
-                if(detail[0].email===email){
-                    setEmailErrorFlag(false)
-                    if(password!==''){
-                        if(detail[0].newPassword===password){
-                            setPasswordErrorFlag(false)
-                        }
-                        else{
-                            setPasswordErrorFlag(true)
-                        }
-                    }
+        state.users.forEach(value=>{
+            if(data.email!=='' && value.email===data.email){
+                if(data.password!=='' && value.password===data.password){
+                    setDataValidation({email:false,password:false})
                 }
                 else{
-                    setEmailErrorFlag(true)
+                    setDataValidation({email:false,password:true})
                 }
             }
             else{
-                setEmailErrorFlag(true)
+                setDataValidation({email:true,password:false})
             }
-        }
-        
-
-        setEmailFlag(true)
-        setPasswordFlag(true)
+        })
     }
+    
 
     return(
         <div className="container">
@@ -81,14 +98,12 @@ const Login = () =>{
                 </div>
                 <form>
                     <div>
-                        <input type={'text'} name="username" placeholder={'Email'} onChange={(event)=>handleInputValue(event)}></input>
-                        {emailFlag ? (email==='' ? <p><i className="bi bi-star-fill"></i> Email cannot be empty <i className="bi bi-star-fill"></i></p>:null):null}
-                        {emailErrorFlag ? <p><i className="bi bi-star-fill"></i> This email is not have an acoount <i className="bi bi-star-fill"></i></p>:null}
+                        <input type={'text'} name="user-name" placeholder={'Email'} value={data.email} onChange={(event)=>handleInputValue(event)}></input>
+                        {emptyError.email ? (data.email==='' ? <p><i className="bi bi-star-fill"></i> Email cannot be empty <i className="bi bi-star-fill"></i></p>:(dataValidation.email ? <p><i className="bi bi-star-fill"></i> This email not have an account <i className="bi bi-star-fill"></i></p>:null)):null}
                     </div>
                     <div>
-                        <input type={'password'} name='password' placeholder={'password'} onChange={(event)=>handleInputValue(event)}></input>
-                        {passwordFlag ? (password==='' ? <p><i className="bi bi-star-fill"></i> Password cannot be empty <i className="bi bi-star-fill"></i></p>:null):null}
-                        {passwordErrorFlag ? <p><i className="bi bi-star-fill"></i> Password was incorrect <i className="bi bi-star-fill"></i></p>:null}
+                        <input type={'password'} name='password' placeholder={'password'} value={data.password} onChange={(event)=>handleInputValue(event)}></input>
+                        {emptyError.password ? (data.password==='' ? <p><i className="bi bi-star-fill"></i> Password cannot be empty <i className="bi bi-star-fill"></i></p>:(dataValidation.password ? <p><i className="bi bi-star-fill"></i> Password does not match <i className="bi bi-star-fill"></i></p>:null)):null}
                     </div>
                     <div className="button">
                         <button onClick={(event)=>submit(event)}>Login</button>

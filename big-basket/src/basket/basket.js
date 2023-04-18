@@ -16,7 +16,6 @@ import "./basket.scss";
 const Basket = () => {
 
   const state = useSelector(({ products }) => products);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { smartBasket } from "./AllData/smartBasket";
 import { bestSeller } from "./AllData/bestSellers";
 import { vegetables } from "./AllData/vegetables";
+import { useDispatch } from "react-redux";
+import { ref,onValue } from "firebase/database";
+import { db } from "./firebase";
 
 const slice=createSlice({
     name:'products', 
@@ -10,9 +13,13 @@ const slice=createSlice({
         bestSellers:bestSeller,
         friutsAndVegetables:vegetables,
         addToCart:[],
-        loginAuthendication:false
+        loginAuthendication:false,
+        users:[]
     },
     reducers:{
+        users:(state,action)=>{
+            state.users=action.payload;
+        },
         login:(state,action)=>{
             state.loginAuthendication=action.payload;
         },
@@ -42,5 +49,6 @@ const slice=createSlice({
     }
 })
 
-export const { updatePrice,addToCart,updateQuantity,updateQuantityValue,remove,login }=slice.actions;
+
+export const { updatePrice,addToCart,updateQuantity,updateQuantityValue,remove,login,users }=slice.actions;
 export default slice.reducer;

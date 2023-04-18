@@ -78,7 +78,7 @@ const Details = () =>{
             <div className="details-container">
                 <div className="details">
                     <div className="details-image">
-                        <img src={detail.imageUrl} alt='no image'/>
+                        <img src={detail.imageUrl} alt='No Image'/>
                     </div>
                     <div className="details-image-content">
                         <span className="name">{detail.brandName}</span>
