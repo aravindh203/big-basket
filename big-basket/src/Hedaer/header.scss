@@ -34,8 +34,10 @@
                     padding:  0px 5px;
                     .heaer-contact-icon{
                         padding: 0px 10px;
-                        span{
+                        a{
                             font-size: 13px;
+                            text-decoration: none;
+                            color: black;
                         }
                         i{
                             font-size: 15px;

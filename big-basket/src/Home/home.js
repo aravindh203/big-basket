@@ -15,7 +15,7 @@ const Home = () =>{
                     <img src={require('../Asserts/images/homebackground.jpg')} alt='no image'/>
                 </div>
                 <div>
-                    <img src={require('../Asserts/images/homebackground.jpg')} alt='no image'/>
+                    <img src={require('../Asserts/images/logo2.jpg')} alt='no image'/>
                 </div>
             </Slider>
         </div>

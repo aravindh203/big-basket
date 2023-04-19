@@ -88,15 +88,15 @@ const Header = () =>{
                             <div className="header-contact-content">
                                 <div className="heaer-contact-icon">
                                     <i className="bi bi-telephone"></i>
-                                    <span>1860 123 1000</span>
+                                    <a href="tel:9600392639">1860 123 1000</a>
                                 </div>
                                 <div className="heaer-contact-icon">
                                     <i className="bi bi-geo-alt"></i>
-                                    <span>560004,Bangalore</span>
+                                    <a href="#">560004,Bangalore</a>
                                 </div>
                                 <div className="heaer-contact-icon">
                                     <i className="bi bi-person"></i>
-                                    <span>Login/Sign Up</span>
+                                    <a href="#">Login/Sign Up</a>
                                 </div>
                             </div>
                         </div>

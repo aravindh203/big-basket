@@ -46,7 +46,7 @@ const Routing = () =>{
                     <Routes>
                         <Route path='/' element={<Main/>} />
                         <Route path='/details/:key/:index' element={<Details/>} />
-                        <Route path='/allProducts/:key' element={<AllProducts/>} />
+                        <Route path='/allProducts/:key/:heading' element={<AllProducts/>} />
                         <Route path='*' element={<Navigate to={'/'} />}/>
                     </Routes>
                     <Footer/>

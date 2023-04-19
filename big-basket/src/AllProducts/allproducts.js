@@ -70,7 +70,6 @@ const AllProducts = () => {
   };
 
   const [allProductFilter, changeAllProductFilter] = useState("Popularity");
-  console.log("allProductFilter", allProductFilter);
 
   useEffect(() => {
 
@@ -307,7 +306,7 @@ const AllProducts = () => {
           <div className="all-products-cards">
             <div className="all-products-heading">
               <h2>
-                {params.key} ({allProduct.length})
+                {params.heading} ({allProduct.length})
               </h2>
               <select name="cars" id="cars" onChange={(event) => changeAllProductFilter(event.target.value)}>
                 <option value="Popularity">Popularity</option>

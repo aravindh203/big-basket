@@ -10,8 +10,8 @@ const Products = () =>{
     
     const navigate=useNavigate()
 
-    const goToAllProducts = (key) =>{
-        navigate('/allProducts/'+key)
+    const goToAllProducts = (key,heading) =>{
+        navigate('/allProducts/'+key+'/'+heading)
     }
 
     return(
@@ -21,7 +21,7 @@ const Products = () =>{
                     <div className='heading'>
                         <h2>Fruits & vegetables</h2>
                     </div>
-                    <div onClick={()=>goToAllProducts('friutsAndVegetables')} className="product-card">
+                    <div onClick={()=>goToAllProducts('friutsAndVegetables','Organic Fruits & Vegetables')} className="product-card">
                         {
                             fruitsAndVegetables.map((value,index)=>{
                                 return(
@@ -43,7 +43,7 @@ const Products = () =>{
                     <div className='heading'>
                         <h2>Beverages</h2>
                     </div>
-                    <div className="product-card" onClick={()=>goToAllProducts('vegetables')}>
+                    <div className="product-card" onClick={()=>goToAllProducts('vegetables','Health Drinks & Supplement')}>
                         {
                             beverages.map((value,index)=>{
                                 return(
@@ -65,7 +65,7 @@ const Products = () =>{
                     <div className='heading'>
                         <h2>Snack Store</h2>
                     </div>
-                    <div className="product-card" onClick={()=>goToAllProducts('vegetables')}>
+                    <div className="product-card" onClick={()=>goToAllProducts('vegetables','Chai Time Snack')}>
 
                         {
                             snackStore.map((value,index)=>{

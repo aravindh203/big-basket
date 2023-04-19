@@ -128,7 +128,7 @@ const SignUp = () =>{
 
         setDataValidation(validation)
 
-        if(data.userName!=='' &&  data.email!=='' && data.mobileNumber!=='' &&  data.newPassword!=='' && data.confirmPassword!==''){
+        if(emailFormat.test(data.email) && !find && data.userName!=='' &&  data.email!=='' && data.mobileNumber!=='' &&  data.newPassword!=='' && data.confirmPassword!==''){
             if(data.mobileNumber.length==10 && data.newPassword===data.confirmPassword){
                 const id=uid()
                 const newData={
